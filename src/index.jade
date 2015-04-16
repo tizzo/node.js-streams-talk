@@ -1,0 +1,146 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Node.js Streams
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article
+
+      section
+        h1 Node.js Streams
+        h3 Data Flows for Fun and Profit
+
+      section
+        h1 Howard Tyson
+        ul
+          li VP of Engineering at Zivtech
+          li Doing node work for 4 years
+
+      section
+        h2 Credit where credit is due
+        ul
+          li
+            img(src="images/substack.jpg" width="25%" height="30%")
+          li This presentation steals shamelessly from James Holliday (better known as substack) and his <a href="https://github.com/substack/stream-handbook">Stream Handbook</a>
+          li He's way smarter than me
+          li (and probably you).
+      section
+        h1 Act I: The Prologue
+
+      section
+        h1 What are Streams?
+
+      section
+        h2 The wisdom of the elders
+        ul
+          li
+            img(src="images/Doug-McIlroy.png")
+          li
+            blockquote.bullet
+              "We should have some ways of connecting programs like garden hose--screw in
+              another segment when it becomes necessary to massage data in
+              another way. This is the way of IO also."
+      section
+        h2 Not a new idea
+      section
+        h2 Still the new hawtness
+
+      section
+        h1 Think pipes
+
+      section
+        h1 Unix 
+
+      section
+        pre
+          code.language-javascript.
+            vagrant@fgrsdev1:~$ ls -al /
+            total 178
+            dr-xr-xr-x.  23 root    root     4096 Apr 14 17:58 .
+            dr-xr-xr-x.  23 root    root     4096 Apr 14 17:58 ..
+            dr-xr-xr-x.   2 root    root     4096 Jan  2 20:28 bin
+            dr-xr-xr-x.   5 root    root     1024 Mar  9 14:39 boot
+            drwxr-xr-x   17 root    root     3700 Apr 14 10:59 dev
+            drwxr-xr-x.  82 root    root     4096 Apr 14 17:58 etc
+            drwxr-xr-x.  11 root    root     4096 Jan  2 20:32 home
+            dr-xr-xr-x  122 root    root        0 Apr 14 10:57 proc
+            drwxrwxrwt.  30 root    root    77824 Apr 15 14:32 tmp
+            drwxr-xr-x.  12 root    root     4096 Apr 15  2013 usr
+            drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var
+
+      section
+        h2 Only lines with `var` in them
+        pre
+          code.language-javascript.
+            vagrant@fgrsdev1:~$ ls -al / | grep var
+            drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var
+
+      section
+        h2 Count the lines, words, and characters
+        pre
+          code.language-javascript.
+            vagrant@fgrsdev1:~$ ls / | grep var | wc
+                1       9      55
+
+      section
+
+      section
+        h2 Keyboard Interaction
+        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-keys">bespoke-keys</a>
+
+      section
+        h2 Touch Interaction
+        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a>
+
+      section
+        h2 Responsive Slides
+        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a>
+
+      section
+        h2 Bullet List
+        h3.bullet Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a>
+        ul
+          li Bullet 1
+          li Bullet 2
+          li Bullet 3
+
+      section
+        h2 Syntax Highlighting
+        h3 Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a>
+        pre
+          code.language-javascript.
+            bespoke.from('article', [
+              classes(),
+              keys(),
+              touch(),
+              bullets('li, .bullet')
+            ]);
+
+      section(data-bespoke-hash='named-route')
+        h2 Named Route
+        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a>
+        p Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 Emphatic Slide!
+        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-backdrop">bespoke-backdrop</a>
+
+      section
+        h2.bullet Just the beginning...
+        br
+        ul
+          li Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em>
+          li Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em>
+          li Edit JavaScript in <em>'src/scripts/main.js'</em>
+        br
+        ul
+          li
+            strong Enjoy! :)
+            a(href='http://twitter.com/markdalgleish')  -@markdalgleish
+
+    script(src='build/build.js')
