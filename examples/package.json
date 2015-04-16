@@ -1,0 +1,15 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "Examples for this node talk!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Howard Tyson <howard@howardtyson.com>",
+  "dependencies": {
+    "event-stream": "^3.3.0",
+    "split2": "^0.2.1",
+    "through2": "^0.6.5"
+  }
+}

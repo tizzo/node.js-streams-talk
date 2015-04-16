@@ -4,3 +4,4 @@ dist
 bespoke-theme-*
 .DS_Store
 *.swp
+*.swo
