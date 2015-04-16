@@ -249,4 +249,21 @@ html
             | cat example.log.json | nc 8999
         h3 see it in action: `./example8.sh`
 
+      section
+        h2 Let the node server connect to the network
+        pre
+          code.language-javascript
+            | process.stdin
+        h3 Becomes
+        pre
+          code.language-javascript
+            | var readStream = require('net').createServer(function(c) {
+            |   c.pipe(es.split());
+            | }).listen(8999);
+        h3 see it in action: `./example9.sh`
+
+      section
+        h1 Now for an app built this way!
+        h3 <a href="https://github.com/mikadoapp/mikado">The Mikado</a>
+
     script(src='build/build.js')
