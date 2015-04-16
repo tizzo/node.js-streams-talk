@@ -63,7 +63,8 @@
       </section>
       <section>
         <h1>Windows people</h1><img src="http://media.giphy.com/media/ISumMYQyX4sSI/giphy.gif">
-        <h3>seriously… just stop</h3>
+        <h2>seriously… just stop</h2>
+        <h3>you're only hurting yourself</h3>
       </section>
       <section>
         <h2>Love Unix? Think pipes</h2>
@@ -149,6 +150,18 @@ echo -e "foo\nbar" | node example3.js | wc -l</code></pre>
         <h3>follow along: `./example4.sh`</h3>
       </section>
       <section>
+        <h2>In node pretty much all IO is done with streams</h2>
+        <pre><code class="language-javascript">var server = require('http')
+  .createServer(function(req, res) {
+    res.writeHead(200);
+    setInterval(function() {
+      res.write("beep\n");
+    }, 500);
+  });
+server.listen(8000);</code></pre>
+        <h3>follow along: `./example4.sh`</h3>
+      </section>
+      <section>
         <h2>Transform Streams</h2>
         <ul>
           <li>They're readable *AND* writeable</li>
@@ -163,7 +176,7 @@ var fs = require('fs');
 process.stdin
   .pipe(gzip)
   .pipe(process.stdout);</code></pre>
-        <h3>see it in action: `./example5.js`</h3>
+        <h3>see it in action: `./example6.sh`</h3>
       </section>
       <section>
         <h1>Act III: Real Data!</h1>
@@ -175,60 +188,46 @@ process.stdin
         <h2>NOPE! Use line delimited minified JSON!</h2>
       </section>
       <section>
+        <h2>A simple structured protocol</h2>
+        <pre><code class="language-javascript"></code>{"foo":"bar"}
+{"foo":"baz"}</pre>
+        <h3>It's dead simple, easy to parse, and it works everywhere</h3>
+      </section>
+      <section>
         <h2>Event Stream Module!</h2>
-        <pre><code class="language-javascript">h2</code></pre>
+        <pre><code class="language-javascript">var es = require('event-stream');
+process.stdin
+  .pipe(es.split())
+  .pipe(es.parse())
+  .pipe(es.through(function(data) {
+    // Filter all but the type specified at the cli
+    if (data.type == process.argv[2]) {
+      this.queue(data);
+    }
+  }))
+  .pipe(es.stringify())
+  .pipe(process.stdout)
+;</code></pre>
+        <h3>see it in action: `./example7.sh`</h3>
       </section>
       <section>
-        <h2>Keyboard Interaction</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-keys">bespoke-keys</a></h3>
+        <h2>Connect it to the network</h2>
+        <pre><code class="language-javascript">nc -k -l 8999 ./example7.js log</code></pre>
+        <pre><code class="language-javascript">cat example.log.json | nc 8999</code></pre>
+        <h3>see it in action: `./example8.sh`</h3>
       </section>
       <section>
-        <h2>Touch Interaction</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a></h3>
+        <h2>Let the node server connect to the network</h2>
+        <pre><code class="language-javascript">process.stdin</code></pre>
+        <h3>Becomes</h3>
+        <pre><code class="language-javascript">var readStream = require('net').createServer(function(c) {
+  c.pipe(es.split());
+}).listen(8999);</code></pre>
+        <h3>see it in action: `./example9.sh`</h3>
       </section>
       <section>
-        <h2>Responsive Slides</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a></h3>
-      </section>
-      <section>
-        <h2>Bullet List</h2>
-        <h3 class="bullet">Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a></h3>
-        <ul>
-          <li>Bullet 1</li>
-          <li>Bullet 2</li>
-          <li>Bullet 3</li>
-        </ul>
-      </section>
-      <section>
-        <h2>Syntax Highlighting</h2>
-        <h3>Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a></h3>
-        <pre><code class="language-javascript">bespoke.from('article', [
-  classes(),
-  keys(),
-  touch(),
-  bullets('li, .bullet')
-]);
-</code></pre>
-      </section>
-      <section data-bespoke-hash="named-route">
-        <h2>Named Route</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a></h3>
-        <p>Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.</p>
-      </section>
-      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
-        <h2>Emphatic Slide!</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-backdrop">bespoke-backdrop</a></h3>
-      </section>
-      <section>
-        <h2 class="bullet">Just the beginning...</h2><br>
-        <ul>
-          <li>Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em></li>
-          <li>Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em></li>
-          <li>Edit JavaScript in <em>'src/scripts/main.js'</em></li>
-        </ul><br>
-        <ul>
-          <li><strong>Enjoy! :)</strong><a href="http://twitter.com/markdalgleish"> -@markdalgleish</a></li>
-        </ul>
+        <h1>Now for an app built this way!</h1>
+        <h3><a href="https://github.com/mikadoapp/mikado">The Mikado</a></h3>
       </section>
     </article>
     <script src="build/build.js"></script>
