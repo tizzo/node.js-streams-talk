@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Node.js Streams</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section>
+        <h1>Node.js Streams</h1>
+        <h3>Data Flows for Fun and Profit</h3>
+      </section>
+      <section>
+        <h1>Howard Tyson</h1>
+        <ul>
+          <li>VP of Engineering at Zivtech</li>
+          <li>Doing node work for 4 years</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Credit where credit is due</h2>
+        <ul>
+          <li><img src="images/substack.jpg" width="25%" height="30%"></li>
+          <li>This presentation steals shamelessly from James Holliday (better known as substack) and his <a href="https://github.com/substack/stream-handbook">Stream Handbook</a></li>
+          <li>He's way smarter than me</li>
+          <li>(and probably you).</li>
+        </ul>
+      </section>
+      <section>
+        <h1>Act I: The Prologue</h1>
+      </section>
+      <section>
+        <h1>What are Streams?</h1>
+      </section>
+      <section>
+        <h2>Not a new idea</h2>
+      </section>
+      <section>
+        <h2>But still the new hawtness</h2>
+      </section>
+      <section>
+        <h2>The wisdom of the elders</h2>
+        <ul>
+          <li><img src="images/Doug-McIlroy.png"></li>
+          <li>
+            <blockquote>"We should have some ways of connecting programs like garden hose--screw in
+              <another>segment when it becomes necessary to massage data in</another>
+              <another>way. This is the way of IO also."</another>
+            </blockquote>
+          </li>
+          <li></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Love Unix? Think pipes</h2>
+      </section>
+      <section>
+        <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls -al /
+total 178
+dr-xr-xr-x.  23 root    root     4096 Apr 14 17:58 .
+dr-xr-xr-x.  23 root    root     4096 Apr 14 17:58 ..
+dr-xr-xr-x.   2 root    root     4096 Jan  2 20:28 bin
+dr-xr-xr-x.   5 root    root     1024 Mar  9 14:39 boot
+drwxr-xr-x   17 root    root     3700 Apr 14 10:59 dev
+drwxr-xr-x.  82 root    root     4096 Apr 14 17:58 etc
+drwxr-xr-x.  11 root    root     4096 Jan  2 20:32 home
+dr-xr-xr-x  122 root    root        0 Apr 14 10:57 proc
+drwxrwxrwt.  30 root    root    77824 Apr 15 14:32 tmp
+drwxr-xr-x.  12 root    root     4096 Apr 15  2013 usr
+drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var</code></pre>
+        <h3>follow along: `examples/1.sh`</h3>
+      </section>
+      <section>
+        <h2>Count the lines, words, and characters</h2>
+        <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls / | wc
+    20      21     149</code></pre>
+        <h3>follow along: `examples/1.sh`</h3>
+      </section>
+      <section>
+        <h2>Only lines with `var` in them</h2>
+        <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls -al / | grep var
+drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var</code></pre>
+        <h3>follow along: `examples/1.sh`</h3>
+      </section>
+      <section>
+        <h2>Count the lines, words, and characters</h2>
+        <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls / | grep var | wc
+    1       9      55</code></pre>
+        <h3>follow along: `examples/1.sh`</h3>
+      </section>
+      <section>
+        <h1>Act II: Bring on the NODE!</h1>
+      </section>
+      <section>
+        <h1>Stream types</h1>
+      </section>
+      <section>
+        <h1>Different types of streams</h1>
+      </section>
+      <section>
+        <h2>Read Streams</h2>
+        <pre><code class="language-javascript">
+            <var>fs = require('fs');</var>
+            <fs example.txt class="createReadStream"></fs></code></pre>
+      </section>
+      <section>
+        <h1>Pipes!</h1>
+      </section>
+      <section>
+        <h2>Keyboard Interaction</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-keys">bespoke-keys</a></h3>
+      </section>
+      <section>
+        <h2>Touch Interaction</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a></h3>
+      </section>
+      <section>
+        <h2>Responsive Slides</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a></h3>
+      </section>
+      <section>
+        <h2>Bullet List</h2>
+        <h3 class="bullet">Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a></h3>
+        <ul>
+          <li>Bullet 1</li>
+          <li>Bullet 2</li>
+          <li>Bullet 3</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Syntax Highlighting</h2>
+        <h3>Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a></h3>
+        <pre><code class="language-javascript">bespoke.from('article', [
+  classes(),
+  keys(),
+  touch(),
+  bullets('li, .bullet')
+]);
+</code></pre>
+      </section>
+      <section data-bespoke-hash="named-route">
+        <h2>Named Route</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a></h3>
+        <p>Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.</p>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2>Emphatic Slide!</h2>
+        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-backdrop">bespoke-backdrop</a></h3>
+      </section>
+      <section>
+        <h2 class="bullet">Just the beginning...</h2><br>
+        <ul>
+          <li>Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em></li>
+          <li>Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em></li>
+          <li>Edit JavaScript in <em>'src/scripts/main.js'</em></li>
+        </ul><br>
+        <ul>
+          <li><strong>Enjoy! :)</strong><a href="http://twitter.com/markdalgleish"> -@markdalgleish</a></li>
+        </ul>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
