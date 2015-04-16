@@ -50,8 +50,20 @@
               <another>way. This is the way of IO also."</another>
             </blockquote>
           </li>
-          <li></li>
+          <li>Doug McIlroy. October 11, 1964</li>
         </ul>
+      </section>
+      <section>
+        <h1>This presentation has code!</h1>
+        <ul>
+          <li>for posix people</li>
+          <li>sorry windows people</li>
+          <li>to follow along you can clone <a href="https://github.com/tizzo/node.js-streams-talk">this repo</a> and go into the </li>
+        </ul>
+      </section>
+      <section>
+        <h1>Windows people</h1><img src="http://media.giphy.com/media/ISumMYQyX4sSI/giphy.gif">
+        <h3>seriously… just stop</h3>
       </section>
       <section>
         <h2>Love Unix? Think pipes</h2>
@@ -63,32 +75,30 @@ dr-xr-xr-x.  23 root    root     4096 Apr 14 17:58 .
 dr-xr-xr-x.  23 root    root     4096 Apr 14 17:58 ..
 dr-xr-xr-x.   2 root    root     4096 Jan  2 20:28 bin
 dr-xr-xr-x.   5 root    root     1024 Mar  9 14:39 boot
-drwxr-xr-x   17 root    root     3700 Apr 14 10:59 dev
-drwxr-xr-x.  82 root    root     4096 Apr 14 17:58 etc
-drwxr-xr-x.  11 root    root     4096 Jan  2 20:32 home
+[...]
 dr-xr-xr-x  122 root    root        0 Apr 14 10:57 proc
 drwxrwxrwt.  30 root    root    77824 Apr 15 14:32 tmp
 drwxr-xr-x.  12 root    root     4096 Apr 15  2013 usr
 drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var</code></pre>
-        <h3>follow along: `examples/1.sh`</h3>
+        <h3>follow along: ./example1.sh</h3>
       </section>
       <section>
         <h2>Count the lines, words, and characters</h2>
         <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls / | wc
     20      21     149</code></pre>
-        <h3>follow along: `examples/1.sh`</h3>
+        <h3>follow along: `./example1.sh`</h3>
       </section>
       <section>
         <h2>Only lines with `var` in them</h2>
         <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls -al / | grep var
 drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var</code></pre>
-        <h3>follow along: `examples/1.sh`</h3>
+        <h3>follow along: `./example1.sh`</h3>
       </section>
       <section>
         <h2>Count the lines, words, and characters</h2>
         <pre><code class="language-javascript">vagrant@fgrsdev1:~$ ls / | grep var | wc
     1       9      55</code></pre>
-        <h3>follow along: `examples/1.sh`</h3>
+        <h3>follow along: `./example1.sh`</h3>
       </section>
       <section>
         <h1>Act II: Bring on the NODE!</h1>
@@ -101,12 +111,72 @@ drwxr-xr-x.  20 root    root     4096 Jan  2 20:28 var</code></pre>
       </section>
       <section>
         <h2>Read Streams</h2>
-        <pre><code class="language-javascript">
-            <var>fs = require('fs');</var>
-            <fs example.txt class="createReadStream"></fs></code></pre>
+        <pre><code class="language-javascript">var fs = require('fs');
+fs.createReadStream('example.txt')</code></pre>
+      </section>
+      <section>
+        <h2>Write Streams</h2>
+        <pre><code class="language-javascript">var fs = require('fs');
+fs.createWriteStream('output.txt')</code></pre>
+      </section>
+      <section>
+        <h2>Neat, but how do you use them together?</h2>
       </section>
       <section>
         <h1>Pipes!</h1>
+      </section>
+      <section>
+        <h2>Piping input straight into ouput</h2>
+        <pre><code class="language-javascript">process.stdin.pipe(process.stdout)</code></pre>
+        <h3>follow along: `./example2.sh`</h3>
+      </section>
+      <section>
+        <h2>Abstract the source: file or stdin</h2>
+        <pre><code class="language-javascript">if (process.argv[2]) {
+  var readStream = fs.createReadStream(process.argv[2]);
+}
+else {
+  var readStream = process.stdin;
+}
+readStream
+  .pipe(process.stdout);</code></pre>
+        <h3>follow along: `./example3.js`</h3>
+      </section>
+      <section>
+        <h2>Specify a file or feed in stdin</h2>
+        <pre><code class="language-javascript">node example3.js example-text.txt | wc -l
+echo -e "foo\nbar" | node example3.js | wc -l</code></pre>
+        <h3>follow along: `./example4.sh`</h3>
+      </section>
+      <section>
+        <h2>Transform Streams</h2>
+        <ul>
+          <li>They're readable *AND* writeable</li>
+          <li>Data goes in one way</li>
+          <li>It comes out another</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Example transform</h2>
+        <pre><code class="language-javascript">var gzip = zlib.createGzip();
+var fs = require('fs');
+process.stdin
+  .pipe(gzip)
+  .pipe(process.stdout);</code></pre>
+        <h3>see it in action: `./example5.js`</h3>
+      </section>
+      <section>
+        <h1>Act III: Real Data!</h1>
+      </section>
+      <section>
+        <h2>So now what, we design our own protocol, worry about frames?</h2>
+      </section>
+      <section>
+        <h2>NOPE! Use line delimited minified JSON!</h2>
+      </section>
+      <section>
+        <h2>Event Stream Module!</h2>
+        <pre><code class="language-javascript">h2</code></pre>
       </section>
       <section>
         <h2>Keyboard Interaction</h2>
