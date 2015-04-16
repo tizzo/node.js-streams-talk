@@ -2,5 +2,14 @@
 
 var fs = require('fs');
 
-fs.createReadStream(process.argv[2])
+var readStream = null;
+
+if (process.argv[2]) {
+  readStream = fs.createReadStream(process.argv[2]);
+}
+else {
+  readStream = process.stdin;
+}
+
+readStream
   .pipe(process.stdout);

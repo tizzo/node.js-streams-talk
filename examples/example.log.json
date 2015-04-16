@@ -1,0 +1,13 @@
+{"type": "log", "msg": "foo"}
+{"type": "log", "msg": "bar"}
+{"type": "error", "msg": "something went wrong, oh noes!"}
+{"type": "error", "msg": "WHAT WAS THAT?!?!?!"}
+{"type": "log", "msg": "foo"}
+{"type": "log", "msg": "foo"}
+{"type": "log", "msg": "bar"}
+{"type": "log", "msg": "bar"}
+{"type": "error", "msg": "something went wrong, oh noes!"}
+{"type": "log", "msg": "bar"}
+{"type": "log", "msg": "foo"}
+{"type": "log", "msg": "bar"}
+{"type": "error", "msg": "something went wrong, oh noes!"}
